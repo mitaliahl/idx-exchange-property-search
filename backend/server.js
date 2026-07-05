@@ -2,12 +2,18 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
+
 const pool = require("./db/pool");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+
+//Allows the server to now handle requests to the route /api/properties
+const propertiesRouter = require("./routes/properties");
+app.use("/api/properties", propertiesRouter);
 
 app.get("/api/health", async (req, res) => {
   try {

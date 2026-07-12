@@ -10,6 +10,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Logs method, URL, status code, and response time for every request
+app.use((req, res, next) => {
+  const startTime = Date.now();
+
+  res.on('finish', () => {
+    const duration = Date.now() - startTime;
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`);
+  });
+
+  next();
+});
 
 //Allows the server to now handle requests to the route /api/properties
 const propertiesRouter = require("./routes/properties");

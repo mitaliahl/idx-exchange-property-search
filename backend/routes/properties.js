@@ -5,17 +5,15 @@ const express = require('express'); // Imports Express
 const router = express.Router(); // A router is needed so server.js can use this file as a route
 const pool = require('../db/pool'); // Imports the MySQL connection pool
 
-// A distinct error type so we can tell apart 400 and 500
+// A distinct error type so we can distinguish 400 and 500
 class ValidationError extends Error {}
 
-
 //Two validation functions here to make sure the input number makes sense.
-
 
 // Checks that a value is a whole number within an optional max, and returns it as a Number.
 // Throws ValidationError if the value is missing, not a number, not an integer, <= 0 or too big.
 function parsePositiveInt(value, fieldName, max = null) {
-  if (value === undefined) return null; // Not provided — caller treats this as "no filter"
+  if (value === undefined) return null; // Not provided caller treats this as "no filter"
 
   const number = Number(value);
 
@@ -107,6 +105,60 @@ router.get('/', async (req, res) => {
     }
     // Not the user's fault DB down, unexpected bug... 500
     console.error("GET /api/properties failed:", err.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Registered before /:id so Express doesn't match this path as an id param
+router.get('/:id/openhouses', async (req, res) => {
+  try {
+    const listingId = parsePositiveInt(req.params.id, "id");
+
+    const [propertyRows] = await pool.query(
+      "SELECT L_ListingID FROM rets_property WHERE L_ListingID = ?",
+      [listingId]
+    );
+
+    if (propertyRows.length === 0) {
+      return res.status(404).json({ error: `Property with id ${listingId} not found` });
+    }
+
+    const [openHouseRows] = await pool.query(
+      "SELECT * FROM rets_openhouse WHERE L_ListingID = ? ORDER BY OpenHouseDate ASC, OH_StartTime ASC",
+      [listingId]
+    );
+
+    return res.json(openHouseRows);
+
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
+    console.error(`GET /api/properties/${req.params.id}/openhouses failed:`, err.message);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const listingId = parsePositiveInt(req.params.id, "id");
+
+    const [rows] = await pool.query(
+      "SELECT * FROM rets_property WHERE L_ListingID = ?",
+      [listingId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: `Property with id ${listingId} not found` });
+    }
+
+    return res.json(rows[0]);
+
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ error: err.message });
+    }
+    console.error(`GET /api/properties/${req.params.id} failed:`, err.message);
     return res.status(500).json({ error: "Internal server error" });
   }
 });

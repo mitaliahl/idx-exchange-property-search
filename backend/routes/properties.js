@@ -103,17 +103,22 @@ router.get('/', async (req, res) => {
       // The user's fault bad input 400
       return res.status(400).json({ error: err.message });
     }
-    // Not the user's fault DB down, unexpected bug... 500
+    // Not the user's fault DB down, unexpected bug (500)
     console.error("GET /api/properties failed:", err.message);
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// Registered before /:id so Express doesn't match this path as an id param
+//GET request to openhouses
+// Registered before /:id 
 router.get('/:id/openhouses', async (req, res) => {
   try {
+    //validation
     const listingId = parsePositiveInt(req.params.id, "id");
 
+    //checks if property exists
+    //separated from querying to differentiate between property doesn't exist (404)
+    // and property exists but no openhouses (200)
     const [propertyRows] = await pool.query(
       "SELECT L_ListingID FROM rets_property WHERE L_ListingID = ?",
       [listingId]
@@ -123,6 +128,7 @@ router.get('/:id/openhouses', async (req, res) => {
       return res.status(404).json({ error: `Property with id ${listingId} not found` });
     }
 
+    //query
     const [openHouseRows] = await pool.query(
       "SELECT * FROM rets_openhouse WHERE L_ListingID = ? ORDER BY OpenHouseDate ASC, OH_StartTime ASC",
       [listingId]
@@ -139,10 +145,15 @@ router.get('/:id/openhouses', async (req, res) => {
   }
 });
 
+// GET request /:id
+
 router.get('/:id', async (req, res) => {
   try {
+
+    //validate
     const listingId = parsePositiveInt(req.params.id, "id");
 
+    //query 
     const [rows] = await pool.query(
       "SELECT * FROM rets_property WHERE L_ListingID = ?",
       [listingId]

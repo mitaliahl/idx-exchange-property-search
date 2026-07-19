@@ -1,0 +1,43 @@
+.property-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.property-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.property-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.no-photo {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+}
+
+.property-info {
+  padding: 12px;
+}
+
+.property-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.property-city {
+  color: #666;
+}
+
+.property-stats {
+  margin-top: 8px;
+  color: #444;
+  font-size: 0.9rem;
+}

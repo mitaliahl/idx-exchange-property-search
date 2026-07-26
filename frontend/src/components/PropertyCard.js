@@ -40,7 +40,7 @@ function PropertyCard({ property }) {
           {property.L_City}, {property.L_State}
         </div>
         <div className="property-stats">
-          {property.L_Keyword2} beds · {property.LM_Dec_3} baths · {property.LotSizeSquareFeet} sqft
+          {property.L_Keyword2} beds · {property.LM_Dec_3} baths · {property.LM_Int2_3} sqft
         </div>
       </div>
     </div>

@@ -34,13 +34,13 @@ function PropertyFilters({ onSearch, onClear }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="city" placeholder="City" value={filters.city} onChange={handleChange} />
-      <input name="zipcode" placeholder="ZIP code" value={filters.zipcode} onChange={handleChange} />
-      <input name="minPrice" placeholder="Min price" value={filters.minPrice} onChange={handleChange} />
-      <input name="maxPrice" placeholder="Max price" value={filters.maxPrice} onChange={handleChange} />
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "20px" }}>
+      <input name="city" placeholder="City" value={filters.city} onChange={handleChange} style={{ padding: "8px" }} />
+      <input name="zipcode" placeholder="ZIP code" value={filters.zipcode} onChange={handleChange} style={{ padding: "8px" }} />
+      <input name="minPrice" placeholder="Min price" value={filters.minPrice} onChange={handleChange} style={{ padding: "8px" }} />
+      <input name="maxPrice" placeholder="Max price" value={filters.maxPrice} onChange={handleChange} style={{ padding: "8px" }} />
 
-      <select name="beds" value={filters.beds} onChange={handleChange}>
+      <select name="beds" value={filters.beds} onChange={handleChange} style={{ padding: "8px" }}>
         <option value="">Beds</option>
         <option value="1">1+</option>
         <option value="2">2+</option>
@@ -49,7 +49,7 @@ function PropertyFilters({ onSearch, onClear }) {
         <option value="5">5+</option>
       </select>
 
-      <select name="baths" value={filters.baths} onChange={handleChange}>
+      <select name="baths" value={filters.baths} onChange={handleChange} style={{ padding: "8px" }}>
         <option value="">Baths</option>
         <option value="1">1+</option>
         <option value="2">2+</option>
@@ -57,8 +57,8 @@ function PropertyFilters({ onSearch, onClear }) {
         <option value="4">4+</option>
       </select>
 
-      <button type="submit">Search</button>
-      <button type="button" onClick={handleClear}>Clear Filters</button>
+      <button type="submit" style={{ padding: "8px 16px" }}>Search</button>
+      <button type="button" onClick={handleClear} style={{ padding: "8px 16px" }}>Clear Filters</button>
     </form>
   );
 }

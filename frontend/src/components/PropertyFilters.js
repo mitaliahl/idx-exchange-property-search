@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./PropertyFilters.css";
 
 function PropertyFilters({ onSearch, onClear }) {
   const [filters, setFilters] = useState({
@@ -34,31 +35,53 @@ function PropertyFilters({ onSearch, onClear }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "20px" }}>
-      <input name="city" placeholder="City" value={filters.city} onChange={handleChange} style={{ padding: "8px" }} />
-      <input name="zipcode" placeholder="ZIP code" value={filters.zipcode} onChange={handleChange} style={{ padding: "8px" }} />
-      <input name="minPrice" placeholder="Min price" value={filters.minPrice} onChange={handleChange} style={{ padding: "8px" }} />
-      <input name="maxPrice" placeholder="Max price" value={filters.maxPrice} onChange={handleChange} style={{ padding: "8px" }} />
+    <form onSubmit={handleSubmit} className="filters-bar">
+      <div className="filter-field">
+        <label htmlFor="city">City</label>
+        <input id="city" name="city" placeholder="e.g. Portland" value={filters.city} onChange={handleChange} />
+      </div>
 
-      <select name="beds" value={filters.beds} onChange={handleChange} style={{ padding: "8px" }}>
-        <option value="">Beds</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
-        <option value="4">4+</option>
-        <option value="5">5+</option>
-      </select>
+      <div className="filter-field">
+        <label htmlFor="zipcode">ZIP code</label>
+        <input id="zipcode" name="zipcode" placeholder="e.g. 90210" value={filters.zipcode} onChange={handleChange} />
+      </div>
 
-      <select name="baths" value={filters.baths} onChange={handleChange} style={{ padding: "8px" }}>
-        <option value="">Baths</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
-        <option value="4">4+</option>
-      </select>
+      <div className="filter-field filter-field-price">
+        <label>Price range</label>
+        <div className="price-inputs">
+          <input name="minPrice" placeholder="Min" value={filters.minPrice} onChange={handleChange} />
+          <span className="price-separator">–</span>
+          <input name="maxPrice" placeholder="Max" value={filters.maxPrice} onChange={handleChange} />
+        </div>
+      </div>
 
-      <button type="submit" style={{ padding: "8px 16px" }}>Search</button>
-      <button type="button" onClick={handleClear} style={{ padding: "8px 16px" }}>Clear Filters</button>
+      <div className="filter-field">
+        <label htmlFor="beds">Beds</label>
+        <select id="beds" name="beds" value={filters.beds} onChange={handleChange}>
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+
+      <div className="filter-field">
+        <label htmlFor="baths">Baths</label>
+        <select id="baths" name="baths" value={filters.baths} onChange={handleChange}>
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+        </select>
+      </div>
+
+      <div className="filter-buttons">
+        <button type="submit" className="btn-primary">Search</button>
+        <button type="button" onClick={handleClear} className="btn-secondary">Clear</button>
+      </div>
     </form>
   );
 }

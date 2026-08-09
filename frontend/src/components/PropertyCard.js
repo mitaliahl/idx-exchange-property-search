@@ -1,49 +1,30 @@
+import { Link } from "react-router-dom";
+import PropertyImageCarousel from "./PropertyImageCarousel";
 import "./PropertyCard.css";
 
-// L_Photos is stored as a JSON string and isn't always valid or present
-// so this safely returns the first photo URL or null
-function getFirstPhoto(photosJson) {
-  if (!photosJson) return null;
-
-  try {
-    const photos = JSON.parse(photosJson);
-    if (Array.isArray(photos) && photos.length > 0) {
-      return photos[0];
-    }
-    return null;
-  } catch (err) {
-    return null;
-  }
-}
-
 function PropertyCard({ property }) {
-  const photoUrl = getFirstPhoto(property.L_Photos);
+  const stats = [];
+  if (property.L_Keyword2) stats.push(`${property.L_Keyword2} beds`);
+  if (property.LM_Dec_3) stats.push(`${property.LM_Dec_3} baths`);
+  if (property.LM_Int2_3) stats.push(`${property.LM_Int2_3} sqft`);
 
   return (
-    <div className="property-card">
-      {photoUrl ? (
-        <img
-          className="property-photo"
-          src={photoUrl}
-          alt={property.L_Address || "Property"}
-        />
-      ) : (
-        <div className="no-photo">No photo available</div>
-      )}
+    <Link to={`/property/${property.L_ListingID}`} className="property-card">
+      <PropertyImageCarousel photosJson={property.L_Photos} altText={property.L_Address} />
 
       <div className="property-info">
         <div className="property-price">
-          ${Number(property.L_SystemPrice).toLocaleString("en-US")}
+          {property.L_SystemPrice
+            ? `$${Number(property.L_SystemPrice).toLocaleString("en-US")}`
+            : "Price not available"}
         </div>
         <div>{property.L_Address}</div>
         <div className="property-city">
           {property.L_City}, {property.L_State}
         </div>
-        <div className="property-stats">
-          {property.L_Keyword2} beds · {property.LM_Dec_3} baths · {property.LM_Int2_3} sqft
-        </div>
+        <div className="property-stats">{stats.join(" · ")}</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

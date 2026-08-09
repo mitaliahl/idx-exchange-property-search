@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: #f5f1ea;
+  color: #2b2621;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  color: #2b2621;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #c9beac;
+  border-radius: 4px;
+  background: white;
+  font-family: inherit;
+  color: #2b2621;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #eae3d6;
+  border-color: #a89878;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+input, select {
+  border: 1px solid #c9beac;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: white;
+  color: #2b2621;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #7a6a4f;
+  box-shadow: 0 0 0 3px rgba(122, 106, 79, 0.15);
+}
+
+.site-header {
+  background: white;
+  border-bottom: 1px solid #e2d9c8;
+  padding: 20px 24px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: baseline;
+  gap: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+.site-logo {
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2b2621;
+  letter-spacing: 0.01em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.site-tagline {
+  margin: 0;
+  color: #8a7d68;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }

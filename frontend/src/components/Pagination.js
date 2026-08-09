@@ -12,7 +12,7 @@ function getPageNumbers(currentPage, totalPages) {
 
   // Current page is near the start
   if (currentPage <= 4) {
-    pages.push(1, 2, 3, 4, 5, "...", totalPages);
+    pages.push(1, 2, "...", totalPages);
     return pages;
   }
 
@@ -37,6 +37,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <div style={{ display: "flex", gap: "6px", justifyContent: "center", marginTop: "20px" }}>
+      {/* Previous button */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -58,6 +59,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         )
       )}
 
+      {/* Next button */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

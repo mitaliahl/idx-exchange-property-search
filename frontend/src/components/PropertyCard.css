@@ -1,17 +1,26 @@
 .property-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  display: block;
+  border: 1px solid #e2d9c8;
+  border-radius: 6px;
   overflow: hidden;
+  background: white;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .property-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(43, 38, 33, 0.12);
+  transform: translateY(-2px);
+}
+
+.carousel {
+  position: relative;
 }
 
 .property-photo {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  display: block;
 }
 
 .no-photo {
@@ -20,24 +29,62 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f0f0f0;
+  background: #eee6d8;
+  color: #8a7d68;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 1;
+  color: #2b2621;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-arrow-left {
+  left: 8px;
+}
+
+.carousel-arrow-right {
+  right: 8px;
+}
+
+.carousel-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(43, 38, 33, 0.75);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 0.75rem;
 }
 
 .property-info {
-  padding: 12px;
+  padding: 14px;
 }
 
 .property-price {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2b2621;
 }
 
 .property-city {
-  color: #666;
+  color: #6b5f4f;
+  font-size: 0.9rem;
 }
 
 .property-stats {
   margin-top: 8px;
-  color: #444;
-  font-size: 0.9rem;
+  color: #4a4235;
+  font-size: 0.85rem;
 }

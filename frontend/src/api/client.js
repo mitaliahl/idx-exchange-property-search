@@ -20,3 +20,7 @@ export function fetchProperties(params = {}) {
 export function fetchPropertyDetail(id) {
   return request(`/api/properties/${id}`);
 }
+
+export function fetchOpenHouses(id) {
+  return request(`/api/properties/${id}/openhouses`);
+}

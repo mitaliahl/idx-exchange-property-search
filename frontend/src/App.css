@@ -79,3 +79,13 @@ input:focus, select:focus {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
+.favorites-nav-link {
+  margin-left: auto;
+  color: #7a6a4f;
+  font-weight: 500;
+}
+
+.favorites-nav-link:hover {
+  text-decoration: underline;
+}

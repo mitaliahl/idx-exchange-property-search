@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPropertyDetail } from "../api/client";
-import useFavorites from "../hooks/UseFavorites.js";
+import useFavorites from "../hooks/useFavorites.js";
 import PropertyCard from "./PropertyCard";
 
 function FavoritesPage() {
